@@ -1,8 +1,4 @@
-#include <iostream>
-#include <algorithm>
-#include <cfloat>
-#include <stack>
-#include <set>
+#include <bits/stdc++.h>
 using namespace std;
 
 //initiallising row and columns initially
@@ -13,6 +9,8 @@ using namespace std;
 
 typedef pair<int,int> pair1;
 typedef pair<double,pair<int,int> > pPair;
+
+vector<pair<int,int>> v;
 
 struct cell{
 
@@ -86,8 +84,9 @@ void tracePath(cell cellDetails[][COL],pair1 dest){
 		pair<int,int> p = path.top();
 		path.pop();
 		cout<<"("<<p.first<<","<<p.second<<") -> ";
+        v.push_back(make_pair(p.first,p.second));
 	}
-    cout<<"clean it !!!";
+    cout<<"clean it !!!"<<endl;
 	return;
 }
 
@@ -461,6 +460,25 @@ void aStarSearch(int grid[][COL],pair1 src,pair1 dest){
 	} 
 }
 
+    void print_grid(){
+
+        int grid1[ROW][COL] = {0};
+
+        for(auto x:v){
+            grid1[x.first][x.second] = 1;
+        }
+        
+        for(int i=0;i<ROW;i++){
+            for(int j=0;j<COL;j++){
+                cout<<grid1[i][j]<<" ";
+            }
+            cout<<endl;
+        }
+
+
+    }
+
+
 	int main(){
 
 		//description of the grid
@@ -488,5 +506,7 @@ void aStarSearch(int grid[][COL],pair1 src,pair1 dest){
 		pair1 dest = make_pair(0,0);
 
 		aStarSearch(grid,src,dest);
+
+        print_grid();
 		return 0;
 	}
